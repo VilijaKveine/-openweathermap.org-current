@@ -6,6 +6,170 @@
 	},
 	"item": [
 		{
+			"name": "Request should return correct data when authorization API key is correct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "759363ff-99b6-4ebd-8cfc-91aa29cd0fb6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var response=pm.response.json();\r",
+							"\r",
+							"var responseSchema = {\r",
+							"     \"coord\": {\r",
+							"        \"lon\": \"double\",\r",
+							"        \"lat\": \"double\"\r",
+							"    },\r",
+							"    \"weather\": [\r",
+							"        {\r",
+							"            \"id\": \"integer\",\r",
+							"            \"main\": \"string\",\r",
+							"            \"description\": \"string\",\r",
+							"            \"icon\": \"string\"\r",
+							"        }\r",
+							"    ],\r",
+							"    \"base\": \"string\",\r",
+							"    \"main\": {\r",
+							"        \"temp\": \"double\",\r",
+							"        \"feels_like\": \"double\",\r",
+							"        \"temp_min\": \"double\",\r",
+							"        \"temp_max\": \"double\",\r",
+							"        \"pressure\": \"integer\",\r",
+							"        \"humidity\": \"integer\"\r",
+							"    },\r",
+							"    \"visibility\": \"integer\",\r",
+							"    \"wind\": {\r",
+							"        \"speed\": \"double\",\r",
+							"        \"deg\": \"integer\",\r",
+							"        \r",
+							"    },\r",
+							"    \"clouds\": {\r",
+							"        \"all\": \"integer\"\r",
+							"    },\r",
+							"    \"dt\": \"integer\",\r",
+							"    \"sys\": {\r",
+							"        \"type\": \"integer\",\r",
+							"        \"id\": \"integer\",\r",
+							"        \"country\": \"string\",\r",
+							"        \"sunrise\": \"integer\",\r",
+							"        \"sunset\": \"integer\"\r",
+							"    },\r",
+							"    \"timezone\": \"double\",\r",
+							"    \"id\": \"integer\",\r",
+							"    \"name\": \"string\",\r",
+							"    \"cod\": \"integer\"\r",
+							"  };\r",
+							"  pm.test(\"response has valid schema\",function(){\r",
+							"    pm.expect(tv4.validate(response, responseSchema)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "eyJpdiI6Ik5TcVJhSGxQXC92aUZtd3NsendYSnBnPT0iLCJ2YWx1ZSI6IlhhOVdlQjltQjNHUXdEUThKcTlkb0RlU0l1Rk0zZnZQdHArbjNrNzV2d1Q2TXlBSHFQWGwxTVl5N2Vlc1FGcTdNOWxYa2pNaCtkMXdQQ3FXOE5PNkV3PT0iLCJtYWMiOiIzYzZkMjYxYzRjM2NlZDk5OWQ4YmQ0YTE4ODRmNTYxNTc3OTBjMTA4ZjkxNTY3ZDFlOGI3OTk3Y2Y3MDA1NGEwIn0%3D"
+					}
+				],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?id={{cityId}}&appid={{APIkey}}\n",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{cityId}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{APIkey}}\n"
+						}
+					]
+				},
+				"description": "Test for check is correct data response when API key is correct.Test flow positive."
+			},
+			"response": []
+		},
+		{
+			"name": "Request should return authorization error when  API key is incorrect",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39d8b73e-b376-4cbc-9e23-39c0def0338a",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Authorization error messsage\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid API key\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "eyJpdiI6Ik5TcVJhSGxQXC92aUZtd3NsendYSnBnPT0iLCJ2YWx1ZSI6IlhhOVdlQjltQjNHUXdEUThKcTlkb0RlU0l1Rk0zZnZQdHArbjNrNzV2d1Q2TXlBSHFQWGwxTVl5N2Vlc1FGcTdNOWxYa2pNaCtkMXdQQ3FXOE5PNkV3PT0iLCJtYWMiOiIzYzZkMjYxYzRjM2NlZDk5OWQ4YmQ0YTE4ODRmNTYxNTc3OTBjMTA4ZjkxNTY3ZDFlOGI3OTk3Y2Y3MDA1NGEwIn0%3D"
+					}
+				],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?id={{cityId}}&appid={{InvalidAPIkey}}\n",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{cityId}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{InvalidAPIkey}}\n"
+						}
+					]
+				},
+				"description": "Test for check is response returns authorization error when API key is incorrect. Test pass"
+			},
+			"response": []
+		},
+		{
 			"name": "Request should return corect data when city id is correct",
 			"event": [
 				{
@@ -16,9 +180,54 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
+							"var response=pm.response.json();\r",
 							"\r",
-							"pm.test(\"State name\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"var responseSchema = {\r",
+							"     \"coord\": {\r",
+							"        \"lon\": \"double\",\r",
+							"        \"lat\": \"double\"\r",
+							"    },\r",
+							"    \"weather\": [\r",
+							"        {\r",
+							"            \"id\": \"integer\",\r",
+							"            \"main\": \"string\",\r",
+							"            \"description\": \"string\",\r",
+							"            \"icon\": \"string\"\r",
+							"        }\r",
+							"    ],\r",
+							"    \"base\": \"string\",\r",
+							"    \"main\": {\r",
+							"        \"temp\": \"double\",\r",
+							"        \"feels_like\": \"double\",\r",
+							"        \"temp_min\": \"double\",\r",
+							"        \"temp_max\": \"double\",\r",
+							"        \"pressure\": \"integer\",\r",
+							"        \"humidity\": \"integer\"\r",
+							"    },\r",
+							"    \"visibility\": \"integer\",\r",
+							"    \"wind\": {\r",
+							"        \"speed\": \"double\",\r",
+							"        \"deg\": \"integer\",\r",
+							"\r",
+							"    },\r",
+							"    \"clouds\": {\r",
+							"        \"all\": \"integer\"\r",
+							"    },\r",
+							"    \"dt\": \"integer\",\r",
+							"    \"sys\": {\r",
+							"        \"type\": \"integer\",\r",
+							"        \"id\": \"integer\",\r",
+							"        \"country\": \"string\",\r",
+							"        \"sunrise\": \"integer\",\r",
+							"        \"sunset\": \"integer\"\r",
+							"    },\r",
+							"    \"timezone\": \"double\",\r",
+							"    \"id\": \"integer\",\r",
+							"    \"name\": \"string\",\r",
+							"    \"cod\": \"integer\"\r",
+							"  };\r",
+							"  pm.test(\"response has valid schema\",function(){\r",
+							"    pm.expect(tv4.validate(response, responseSchema)).to.be.true;\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -75,39 +284,45 @@
 			"response": []
 		},
 		{
-			"name": "Request should return authorization error when  API key is incorrect",
+			"name": "Request should return validation error bad request when city id  is letter or negative number, but response just skips bad  requests, but counts like it's one of city IDs",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "39d8b73e-b376-4cbc-9e23-39c0def0338a",
+						"id": "ea4138d2-5be1-4d47-babd-cf405733cb20",
 						"exec": [
-							"pm.test(\"Status code is 401\", function () {\r",
-							"    pm.response.to.have.status(401);\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Authorization error messsage\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"Invalid API key\");\r",
+							"pm.test(\"Body matches error code\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"400\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches error message\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id list must be in range from 1 to 20\");\r",
 							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "078d255c-d44f-47ae-b70b-a9fa484ad59b",
+						"exec": [
+							"pm.globals.set(\"cityIdMulti\", \"b,-524901,703448,2643743,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,v,14256,14256,14256,gbn14256\");"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "auth",
-						"type": "text",
-						"value": "eyJpdiI6Ik5TcVJhSGxQXC92aUZtd3NsendYSnBnPT0iLCJ2YWx1ZSI6IlhhOVdlQjltQjNHUXdEUThKcTlkb0RlU0l1Rk0zZnZQdHArbjNrNzV2d1Q2TXlBSHFQWGwxTVl5N2Vlc1FGcTdNOWxYa2pNaCtkMXdQQ3FXOE5PNkV3PT0iLCJtYWMiOiIzYzZkMjYxYzRjM2NlZDk5OWQ4YmQ0YTE4ODRmNTYxNTc3OTBjMTA4ZjkxNTY3ZDFlOGI3OTk3Y2Y3MDA1NGEwIn0%3D"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "api.openweathermap.org/data/2.5/weather?id=2172797&appid={{InvalidAPIkey}}\n",
+					"raw": "https://api.openweathermap.org/data/2.5/group?id={{cityIdMulti}}&appid={{APIkey}}",
+					"protocol": "https",
 					"host": [
 						"api",
 						"openweathermap",
@@ -116,57 +331,59 @@
 					"path": [
 						"data",
 						"2.5",
-						"weather"
+						"group"
 					],
 					"query": [
 						{
 							"key": "id",
-							"value": "2172797"
+							"value": "{{cityIdMulti}}"
 						},
 						{
 							"key": "appid",
-							"value": "{{InvalidAPIkey}}\n"
+							"value": "{{APIkey}}"
 						}
 					]
 				},
-				"description": "Test for check is response returns authorization error when API key is incorrect. Test pass"
+				"description": "1. Request should return validatione error bad request with a letter or negative number, or mixed(numbers with letters) id number, but there no any reaction, just ignore that id number is invalid. \r\nShould return validation error - bad request, city ID should be a float. \r\n2. This test should check is it realy returns error message with too long requested list and to check is the program counts all \"city IDs\" given no metter is it valid or not.\r\nAll given \"city IDs\" counts like valid, and returns message error with too long list of cities IDs (the range between 1-20).\r\n3. The same city ID number indicated like new one. It should not be."
 			},
 			"response": []
 		},
 		{
-			"name": "Request should return correct data when authorization API key is correct",
+			"name": "Request should return message error bad request with negative  id number, but response just skip bad  negative request",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "759363ff-99b6-4ebd-8cfc-91aa29cd0fb6",
+						"id": "5d0df91f-146f-4caa-9d9c-48ec9967732b",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"State name\", function () {\r",
+							"pm.test(\"Body matches string\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
 							"});"
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1559cd57-26a2-4aa5-90a3-df6d44764ff8",
+						"exec": [
+							"pm.globals.set(\"cityIdMulti\", \"-524901,703448,2643743,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,v,14256,14256,14256,14256\");"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "auth",
-						"type": "text",
-						"value": "eyJpdiI6Ik5TcVJhSGxQXC92aUZtd3NsendYSnBnPT0iLCJ2YWx1ZSI6IlhhOVdlQjltQjNHUXdEUThKcTlkb0RlU0l1Rk0zZnZQdHArbjNrNzV2d1Q2TXlBSHFQWGwxTVl5N2Vlc1FGcTdNOWxYa2pNaCtkMXdQQ3FXOE5PNkV3PT0iLCJtYWMiOiIzYzZkMjYxYzRjM2NlZDk5OWQ4YmQ0YTE4ODRmNTYxNTc3OTBjMTA4ZjkxNTY3ZDFlOGI3OTk3Y2Y3MDA1NGEwIn0%3D"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "api.openweathermap.org/data/2.5/weather?id=2172797&appid={{APIkey}}\n",
+					"raw": "https://api.openweathermap.org/data/2.5/group?id={{cityIdMulti}}&appid={{APIkey}}",
+					"protocol": "https",
 					"host": [
 						"api",
 						"openweathermap",
@@ -175,20 +392,20 @@
 					"path": [
 						"data",
 						"2.5",
-						"weather"
+						"group"
 					],
 					"query": [
 						{
 							"key": "id",
-							"value": "2172797"
+							"value": "{{cityIdMulti}}"
 						},
 						{
 							"key": "appid",
-							"value": "{{APIkey}}\n"
+							"value": "{{APIkey}}"
 						}
 					]
 				},
-				"description": "Test for check is correct data response when API key is correct.Test flow positive."
+				"description": "Request should return message error bad request with negative  id number, but there no any reaction, just ignore that id number with negative meaning.\r\nShould return message error - bad request, negative id not allowed."
 			},
 			"response": []
 		},
@@ -204,8 +421,54 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"State name\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"var response=pm.response.json();\r",
+							"\r",
+							"var responseSchema = {\r",
+							"     \"coord\": {\r",
+							"        \"lon\": \"double\",\r",
+							"        \"lat\": \"double\"\r",
+							"    },\r",
+							"    \"weather\": [\r",
+							"        {\r",
+							"            \"id\": \"integer\",\r",
+							"            \"main\": \"string\",\r",
+							"            \"description\": \"string\",\r",
+							"            \"icon\": \"string\"\r",
+							"        }\r",
+							"    ],\r",
+							"    \"base\": \"string\",\r",
+							"    \"main\": {\r",
+							"        \"temp\": \"double\",\r",
+							"        \"feels_like\": \"double\",\r",
+							"        \"temp_min\": \"double\",\r",
+							"        \"temp_max\": \"double\",\r",
+							"        \"pressure\": \"integer\",\r",
+							"        \"humidity\": \"integer\"\r",
+							"    },\r",
+							"    \"visibility\": \"integer\",\r",
+							"    \"wind\": {\r",
+							"        \"speed\": \"double\",\r",
+							"        \"deg\": \"integer\",\r",
+							"        \"gust\": \"double\"\r",
+							"    },\r",
+							"    \"clouds\": {\r",
+							"        \"all\": \"integer\"\r",
+							"    },\r",
+							"    \"dt\": \"integer\",\r",
+							"    \"sys\": {\r",
+							"        \"type\": \"integer\",\r",
+							"        \"id\": \"integer\",\r",
+							"        \"country\": \"string\",\r",
+							"        \"sunrise\": \"integer\",\r",
+							"        \"sunset\": \"integer\"\r",
+							"    },\r",
+							"    \"timezone\": \"double\",\r",
+							"    \"id\": \"integer\",\r",
+							"    \"name\": \"string\",\r",
+							"    \"cod\": \"integer\"\r",
+							"  };\r",
+							"  pm.test(\"response has valid schema\",function(){\r",
+							"    pm.expect(tv4.validate(response, responseSchema)).to.be.true;\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -431,198 +694,6 @@
 			"response": []
 		},
 		{
-			"name": "Request should return message error bad request with negative  id number, but response just skip bad  negative request",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "5d0df91f-146f-4caa-9d9c-48ec9967732b",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Body matches string\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "1559cd57-26a2-4aa5-90a3-df6d44764ff8",
-						"exec": [
-							"pm.globals.set(\"cityIdMulti\", \"-524901,703448,2643743,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,v,14256,14256,14256,14256\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.openweathermap.org/data/2.5/group?id={{cityIdMulti}}&appid={{APIkey}}",
-					"protocol": "https",
-					"host": [
-						"api",
-						"openweathermap",
-						"org"
-					],
-					"path": [
-						"data",
-						"2.5",
-						"group"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "{{cityIdMulti}}"
-						},
-						{
-							"key": "appid",
-							"value": "{{APIkey}}"
-						}
-					]
-				},
-				"description": "Request should return message error bad request with negative  id number, but there no any reaction, just ignore that id number with negative meaning.\r\nShould return message error - bad request, negative id not allowed."
-			},
-			"response": []
-		},
-		{
-			"name": "Request should return validation error bad request when city id  is letter or negative number, but response just skips bad  requests, but counts like it's one of city IDs",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "ea4138d2-5be1-4d47-babd-cf405733cb20",
-						"exec": [
-							"pm.test(\"Status code is 400\", function () {\r",
-							"    pm.response.to.have.status(400);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Body matches error code\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"400\");\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Body matches error message\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"id list must be in range from 1 to 20\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "078d255c-d44f-47ae-b70b-a9fa484ad59b",
-						"exec": [
-							"pm.globals.set(\"cityIdMulti\", \"b,-524901,703448,2643743,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,14256,v,14256,14256,14256,gbn14256\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.openweathermap.org/data/2.5/group?id={{cityIdMulti}}&appid={{APIkey}}",
-					"protocol": "https",
-					"host": [
-						"api",
-						"openweathermap",
-						"org"
-					],
-					"path": [
-						"data",
-						"2.5",
-						"group"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "{{cityIdMulti}}"
-						},
-						{
-							"key": "appid",
-							"value": "{{APIkey}}"
-						}
-					]
-				},
-				"description": "1. Request should return validatione error bad request with a letter or negative number, or mixed(numbers with letters) id number, but there no any reaction, just ignore that id number is invalid. \r\nShould return validation error - bad request, city ID should be a float. \r\n2. This test should check is it realy returns error message with too long requested list and to check is the program counts all \"city IDs\" given no metter is it valid or not.\r\nAll given \"city IDs\" counts like valid, and returns message error with too long list of cities IDs (the range between 1-20).\r\n3. The same city ID number indicated like new one. It should not be."
-			},
-			"response": []
-		},
-		{
-			"name": "Request should return code error 500 Internal server error when 2.5 is not given",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "7563f77f-ab1b-46fe-a18b-68d2dfbf26a9",
-						"exec": [
-							"pm.test(\"Status code is 404\", function () {\r",
-							"    pm.response.to.have.status(404);\r",
-							"});\r",
-							"pm.test(\"Error code should be 500, but not 404\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"404\");\r",
-							"});\r",
-							"pm.test(\"Error messag\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"Internal error\");\r",
-							"});\r",
-							"\r",
-							"pm.globals.get(\"q\");\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "724a8aae-1b2c-4463-8702-9d46bf393771",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.openweathermap.org/data/weather?q={{q}}&appid={{APIkey}}",
-					"protocol": "https",
-					"host": [
-						"api",
-						"openweathermap",
-						"org"
-					],
-					"path": [
-						"data",
-						"weather"
-					],
-					"query": [
-						{
-							"key": "q",
-							"value": "{{q}}"
-						},
-						{
-							"key": "appid",
-							"value": "{{APIkey}}"
-						}
-					]
-				},
-				"description": "!I wanted to check what returns request when /2.5/ is not given ()i guess it's some internal value. I got response with 404 code-bad request, but error message - Internal Error. It would be nice to get error code 500. !"
-			},
-			"response": []
-		},
-		{
 			"name": "Request should return validation error when city name is not given",
 			"event": [
 				{
@@ -698,8 +769,53 @@
 							"pm.test(\"City name\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
 							"});\r",
-							"pm.test(\"City name\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"var response=pm.response.json();\r",
+							"\r",
+							"var responseSchema = {\r",
+							"     \"coord\": {\r",
+							"        \"lon\": \"double\",\r",
+							"        \"lat\": \"double\"\r",
+							"    },\r",
+							"    \"weather\": [\r",
+							"        {\r",
+							"            \"id\": \"integer\",\r",
+							"            \"main\": \"string\",\r",
+							"            \"description\": \"string\",\r",
+							"            \"icon\": \"string\"\r",
+							"        }\r",
+							"    ],\r",
+							"    \"base\": \"string\",\r",
+							"    \"main\": {\r",
+							"        \"temp\": \"double\",\r",
+							"        \"feels_like\": \"double\",\r",
+							"        \"temp_min\": \"double\",\r",
+							"        \"temp_max\": \"double\",\r",
+							"        \"pressure\": \"integer\",\r",
+							"        \"humidity\": \"integer\"\r",
+							"    },\r",
+							"    \"visibility\": \"integer\",\r",
+							"    \"wind\": {\r",
+							"        \"speed\": \"double\",\r",
+							"        \"deg\": \"integer\"\r",
+							"    },\r",
+							"    \"clouds\": {\r",
+							"        \"all\": \"integer\"\r",
+							"    },\r",
+							"    \"dt\": \"integer\",\r",
+							"    \"sys\": {\r",
+							"        \"type\": \"integer\",\r",
+							"        \"id\": \"integer\",\r",
+							"        \"country\": \"string\",\r",
+							"        \"sunrise\": \"integer\",\r",
+							"        \"sunset\": \"integer\"\r",
+							"    },\r",
+							"    \"timezone\": \"double\",\r",
+							"    \"id\": \"integer\",\r",
+							"    \"name\": \"string\",\r",
+							"    \"cod\": \"integer\"\r",
+							"  };\r",
+							"  pm.test(\"response has valid schema\",function(){\r",
+							"    pm.expect(tv4.validate(response, responseSchema)).to.be.true;\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -747,7 +863,7 @@
 			"response": []
 		},
 		{
-			"name": "Request should return validation error when zip code is incorrect",
+			"name": "Request should return validation error when ZIP code is incorrect",
 			"event": [
 				{
 					"listen": "test",
@@ -820,13 +936,56 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Name\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
-							"});\r",
+							"var response=pm.response.json();\r",
 							"\r",
-							"pm.globals.get(\"mainTemp\");\r",
+							"var responseSchema = {\r",
+							"    \"message\": \"string\",\r",
+							"    \"cod\": \"integer\",\r",
+							"     \"calctime\":\"double\",\r",
+							"     \"count\":\"integer\",\r",
+							"     \"list\":\r",
+							"         {\r",
+							"            \"id\":\"integer\",\r",
+							"            \"name\": \"string\",\r",
+							"            \"coord\": {\r",
+							"                \"Lon\": \"double\",\r",
+							"                \"Lat\": \"double\"\r",
+							"            },\r",
+							"            \"main\": {\r",
+							"                \"temp\": \"integer\",\r",
+							"                \"feels_like\": \"double\",\r",
+							"                \"temp_min\": \"integer\",\r",
+							"                \"temp_max\": \"integer\",\r",
+							"                \"pressure\": \"integer\",\r",
+							"                \"humidity\": \"integer\"\r",
+							"            },\r",
+							"            \"dt\": \"integer\",\r",
+							"            \"wind\": {\r",
+							"                \"speed\": \"double\",\r",
+							"                \"deg\": \"integer\"\r",
+							"            },\r",
+							"            \"sys\": {\r",
+							"                \"country\": \"string\"\r",
+							"            },\r",
+							"            \"rain\": \"string\",\r",
+							"            \"snow\": \"string\",\r",
+							"            \"clouds\": {\r",
+							"                \"all\": \"integer\"\r",
+							"            },\r",
+							"            \"weather\": [\r",
+							"                {\r",
+							"                    \"id\": \"integer\",\r",
+							"                    \"main\": \"string\",\r",
+							"                    \"description\": \"string\",\r",
+							"                    \"icon\": \"string\"\r",
+							"                }\r",
+							"            ]  \r",
+							"         }\r",
+							"  };\r",
 							"\r",
-							"pm.globals.get(\"langCode\");"
+							"  pm.test(\"response has valid schema\",function(){\r",
+							"    pm.expect(tv4.validate(response, responseSchema)).to.be.true;\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -838,12 +997,15 @@
 						"exec": [
 							"pm.globals.get(\"lon\");\r",
 							"pm.globals.get(\"lat\");\r",
+							"pm.globals.get(\"mainTemp\");\r",
+							"pm.globals.get(\"langCode\");\r",
 							"\r",
 							"function randomNum(min, max) { \r",
 							"  return Math.floor(Math.random() * (max - min + 1) + min);\r",
 							"}\r",
 							"\r",
-							"pm.globals.set(\"cnt\", randomNum(1,50));\r",
+							"//pm.globals.set(\"cnt\", randomNum(1,50)); -generating random cnt\r",
+							"pm.globals.set(\"cnt\", \"\");\r",
 							""
 						],
 						"type": "text/javascript"
@@ -897,7 +1059,7 @@
 			"response": []
 		},
 		{
-			"name": "Request should return correct data by  correct bboxTest",
+			"name": "Request should return correct data by  correct bbox",
 			"event": [
 				{
 					"listen": "test",
@@ -907,8 +1069,53 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"pm.test(\"Body matches string\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"\r",
+							"var response=pm.response.json();\r",
+							"\r",
+							"var responseSchema = {\r",
+							"    \"cod\": \"integer\",\r",
+							"     \"calctime\":\"double\",\r",
+							"     \"cnt\":\"integer\",\r",
+							"     \"list\":\r",
+							"         {\r",
+							"  \"id\":\"integer\",\r",
+							"  \"dt\": \"integer\",\r",
+							"            \"name\": \"string\",\r",
+							"            \"coord\": {\r",
+							"                \"Lon\": \"double\",\r",
+							"                \"Lat\": \"double\"\r",
+							"            },\r",
+							"            \"main\": {\r",
+							"                \"temp\": \"integer\",\r",
+							"                \"feels_like\": \"double\",\r",
+							"                \"temp_min\": \"integer\",\r",
+							"                \"temp_max\": \"integer\",\r",
+							"                \"pressure\": \"integer\",\r",
+							"                \"humidity\": \"integer\"\r",
+							"            },\r",
+							"            \"visibility\": \"integer\",\r",
+							"            \"wind\": {\r",
+							"                \"speed\": \"double\",\r",
+							"                \"deg\": \"integer\"\r",
+							"            },\r",
+							"            \"rain\": \"string\",\r",
+							"            \"snow\": \"string\",\r",
+							"            \"clouds\": {\r",
+							"                \"today\": \"integer\"\r",
+							"            },\r",
+							"            \"weather\": [\r",
+							"                {\r",
+							"                    \"id\": \"integer\",\r",
+							"                    \"main\": \"string\",\r",
+							"                    \"description\": \"string\",\r",
+							"                    \"icon\": \"string\"\r",
+							"                }\r",
+							"            ]  \r",
+							"         }\r",
+							"  };\r",
+							"\r",
+							"pm.test(\"response has valid schema\",function(){\r",
+							"    pm.expect(tv4.validate(response, responseSchema)).to.be.true;\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -1019,7 +1226,7 @@
 			"response": []
 		},
 		{
-			"name": "Request should return error message when instead number is given letter",
+			"name": "Request should return error message when bbox instead number is given letter",
 			"event": [
 				{
 					"listen": "test",
@@ -1079,7 +1286,7 @@
 			"response": []
 		},
 		{
-			"name": "Request should return error message is not a float when instead number is given #, but returns  401 - unauthorized",
+			"name": "Request should return error message when bbox data is not a float when instead number is given #, but returns  401 - unauthorized",
 			"event": [
 				{
 					"listen": "test",
@@ -1135,6 +1342,72 @@
 					]
 				},
 				"description": "This test checks if request returns error code 400(bad request) and error message about not a float value when in requested area is #. Returns error code 401-Unautorized, message-Invalid API key..It's a bug."
+			},
+			"response": []
+		},
+		{
+			"name": "Request should return code error 500 Internal server error when 2.5 is not given",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7563f77f-ab1b-46fe-a18b-68d2dfbf26a9",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Error code should be 500, but not 404\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"404\");\r",
+							"});\r",
+							"pm.test(\"Error messag\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Internal error\");\r",
+							"});\r",
+							"\r",
+							"pm.globals.get(\"q\");\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "724a8aae-1b2c-4463-8702-9d46bf393771",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/weather?q={{q}}&appid={{APIkey}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{q}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{APIkey}}"
+						}
+					]
+				},
+				"description": "!I wanted to check what returns request when /2.5/ is not given ()i guess it's some internal value. I got response with 404 code-bad request, but error message - Internal Error. It would be nice to get error code 500. !"
 			},
 			"response": []
 		}
