@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "6096cb43-bca0-48b0-97f2-e7f49c2e42d3",
 		"name": "openweathermap.org/current",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
@@ -78,9 +78,9 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "auth",
-						"type": "text",
-						"value": "eyJpdiI6Ik5TcVJhSGxQXC92aUZtd3NsendYSnBnPT0iLCJ2YWx1ZSI6IlhhOVdlQjltQjNHUXdEUThKcTlkb0RlU0l1Rk0zZnZQdHArbjNrNzV2d1Q2TXlBSHFQWGwxTVl5N2Vlc1FGcTdNOWxYa2pNaCtkMXdQQ3FXOE5PNkV3PT0iLCJtYWMiOiIzYzZkMjYxYzRjM2NlZDk5OWQ4YmQ0YTE4ODRmNTYxNTc3OTBjMTA4ZjkxNTY3ZDFlOGI3OTk3Y2Y3MDA1NGEwIn0%3D"
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
 					}
 				],
 				"url": {
@@ -137,9 +137,9 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "auth",
-						"type": "text",
-						"value": "eyJpdiI6Ik5TcVJhSGxQXC92aUZtd3NsendYSnBnPT0iLCJ2YWx1ZSI6IlhhOVdlQjltQjNHUXdEUThKcTlkb0RlU0l1Rk0zZnZQdHArbjNrNzV2d1Q2TXlBSHFQWGwxTVl5N2Vlc1FGcTdNOWxYa2pNaCtkMXdQQ3FXOE5PNkV3PT0iLCJtYWMiOiIzYzZkMjYxYzRjM2NlZDk5OWQ4YmQ0YTE4ODRmNTYxNTc3OTBjMTA4ZjkxNTY3ZDFlOGI3OTk3Y2Y3MDA1NGEwIn0%3D"
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
 					}
 				],
 				"url": {
@@ -251,8 +251,8 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "auth",
-						"value": "eyJpdiI6Ik5TcVJhSGxQXC92aUZtd3NsendYSnBnPT0iLCJ2YWx1ZSI6IlhhOVdlQjltQjNHUXdEUThKcTlkb0RlU0l1Rk0zZnZQdHArbjNrNzV2d1Q2TXlBSHFQWGwxTVl5N2Vlc1FGcTdNOWxYa2pNaCtkMXdQQ3FXOE5PNkV3PT0iLCJtYWMiOiIzYzZkMjYxYzRjM2NlZDk5OWQ4YmQ0YTE4ODRmNTYxNTc3OTBjMTA4ZjkxNTY3ZDFlOGI3OTk3Y2Y3MDA1NGEwIn0%3D",
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
 						"type": "text"
 					}
 				],
@@ -319,7 +319,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://api.openweathermap.org/data/2.5/group?id={{cityIdMulti}}&appid={{APIkey}}",
 					"protocol": "https",
@@ -380,7 +386,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://api.openweathermap.org/data/2.5/group?id={{cityIdMulti}}&appid={{APIkey}}",
 					"protocol": "https",
@@ -405,7 +417,7 @@
 						}
 					]
 				},
-				"description": "Request should return message error bad request with negative  id number, but there no any reaction, just ignore that id number with negative meaning.\r\nShould return message error - bad request, negative id not allowed."
+				"description": "Request should return message error bad request with negative  id number, but there no any reaction, just ignore id number with negative meaning.\nShould return message error - bad request, negative id not allowed."
 			},
 			"response": []
 		},
@@ -493,9 +505,9 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "auth",
-						"type": "text",
-						"value": "eyJpdiI6Ik5TcVJhSGxQXC92aUZtd3NsendYSnBnPT0iLCJ2YWx1ZSI6IlhhOVdlQjltQjNHUXdEUThKcTlkb0RlU0l1Rk0zZnZQdHArbjNrNzV2d1Q2TXlBSHFQWGwxTVl5N2Vlc1FGcTdNOWxYa2pNaCtkMXdQQ3FXOE5PNkV3PT0iLCJtYWMiOiIzYzZkMjYxYzRjM2NlZDk5OWQ4YmQ0YTE4ODRmNTYxNTc3OTBjMTA4ZjkxNTY3ZDFlOGI3OTk3Y2Y3MDA1NGEwIn0%3D"
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
 					}
 				],
 				"url": {
@@ -565,7 +577,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://api.openweathermap.org/data/2.5/weather?q={{q}}&mode={{mode_html}}&appid={{APIkey}}",
 					"protocol": "https",
@@ -652,7 +670,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://api.openweathermap.org/data/2.5/weather?q={{q}}&lang={{langCode}}&units={{mainTemp}}&mode={{mode}}&appid={{APIkey}}",
 					"protocol": "https",
@@ -729,7 +753,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "api.openweathermap.org/data/2.5/weather?appid={{APIkey}}&q={{q_empty}}",
+					"raw": "api.openweathermap.org/data/2.5/weather?appid={{APIkey}}&q={{q_empty}}&appid=5febbcd18eedf37bc8c9f59be6c54be9",
 					"host": [
 						"api",
 						"openweathermap",
@@ -748,10 +772,14 @@
 						{
 							"key": "q",
 							"value": "{{q_empty}}"
+						},
+						{
+							"key": "appid",
+							"value": "5febbcd18eedf37bc8c9f59be6c54be9"
 						}
 					]
 				},
-				"description": "Request without city name (empty) returns status code 400 us a bad request, but it could be error message like - \"City name is requared\". "
+				"description": "Request without city name (empty) returns status code 400 us a bad request, but it could be error message like - \"City name is required\". "
 			},
 			"response": []
 		},
@@ -834,7 +862,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "api.openweathermap.org/data/2.5/weather?zip={{zipCode}}&appid={{APIkey}}",
 					"host": [
@@ -858,7 +892,7 @@
 						}
 					]
 				},
-				"description": "Gaved correct zip code to check test result is it correct. Status code 200, returns correct data. If changing US to UK exmpl.:result-not found, bad request."
+				"description": "Give correct zip code to check test result is it correct. Status code 200, returns correct data. For example If changing US to UK:result-not found, bad request."
 			},
 			"response": []
 		},
@@ -896,7 +930,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "api.openweathermap.org/data/2.5/weather?zip={{zipCodeInvalid}}&appid={{APIkey}}",
 					"host": [
@@ -920,7 +960,7 @@
 						}
 					]
 				},
-				"description": "Zip code dosn't have limits. Would be nice to get message with limits of digits. It's posible to enter negative numbers and message error the same - bad request(404)."
+				"description": "Zip code dosn't have limits. Would be nice to get message with limit of digits. It's possible to enter negative numbers and message error the same - bad request(404)."
 			},
 			"response": []
 		},
@@ -1014,7 +1054,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "api.openweathermap.org/data/2.5/find?lat={{lat}}&lon={{lon}}&cnt={{cnt}}&lang={{langCode}}&units={{mainTemp}}&appid={{APIkey}}",
 					"host": [
@@ -1054,7 +1100,7 @@
 						}
 					]
 				},
-				"description": "This request returns response with random generated cities number(from 1-50). By default should return 10 cities, if number from 1 til 50 is not choosen, but default returns only 5 cities, but not 10 us is described in API documentation."
+				"description": "This request returns response with random generated cities number(from 1-50). By default should return 10 cities, if number from 1 til 50 is not chosen, but default returns only 5 cities, but not 10 us is described in API documentation."
 			},
 			"response": []
 		},
@@ -1134,7 +1180,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://api.openweathermap.org/data/2.5/box/city?bbox={{bbox}}&appid={{APIkey}}",
 					"protocol": "http",
@@ -1195,7 +1247,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://api.openweathermap.org/data/2.5/box/city?bbox={{tooLargeArea}}&appid={{APIkey}}",
 					"protocol": "http",
@@ -1256,7 +1314,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "api.openweathermap.org/data/2.5/box/city?bbox={{notAfloat}}&appid={{APIkey}}",
 					"host": [
@@ -1316,7 +1380,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "api.openweathermap.org/data/2.5/box/city?bbox={{bboxIncluded#}}&appid={{APIkey}}",
 					"host": [
@@ -1341,7 +1411,7 @@
 						}
 					]
 				},
-				"description": "This test checks if request returns error code 400(bad request) and error message about not a float value when in requested area is #. Returns error code 401-Unautorized, message-Invalid API key..It's a bug."
+				"description": "This test checks if request returns error code 400(bad request) and error message about not a float value when in requested area is #. Returns error code 401-Unauthorized, message-Invalid API key..It's a bug."
 			},
 			"response": []
 		},
@@ -1383,7 +1453,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "appid",
+						"value": "5febbcd18eedf37bc8c9f59be6c54be9",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://api.openweathermap.org/data/weather?q={{q}}&appid={{APIkey}}",
 					"protocol": "https",
@@ -1407,7 +1483,7 @@
 						}
 					]
 				},
-				"description": "!I wanted to check what returns request when /2.5/ is not given ()i guess it's some internal value. I got response with 404 code-bad request, but error message - Internal Error. It would be nice to get error code 500. !"
+				"description": "I wanted to check what returns request when /2.5/ is not given ()i guess it's some internal value. I got response with 404 code-bad request, but error message - Internal Error. It would be nice to get error code 500. Sounds like a bug!"
 			},
 			"response": []
 		}
